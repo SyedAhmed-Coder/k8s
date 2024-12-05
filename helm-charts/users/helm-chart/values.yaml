@@ -1,0 +1,26 @@
+namespace: default
+image:
+  repository: wasti87/exercise-5
+  tag: default
+
+name: "user"
+
+replicas: 2
+containerPort: 3000
+
+nodeEnv: "default"
+port: "3000"
+
+cronjob:
+  name: user-service-cronjob
+  schedule: "*/15 * * * *"  # Run every 15 minutes
+
+# Secret values (stored as plain text here, but Helm encodes them in the template)
+# dbUser: "secretuser"
+# dbPassword: "secretpass"
+# mongoUri: "mongodb+srv://syedahmedw:oCV6LS1T6Rf1Fuf4@cluster0.z2uny.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+
+service:
+  port: 80
+  targetPort: 3000
+  nodePort: 30001

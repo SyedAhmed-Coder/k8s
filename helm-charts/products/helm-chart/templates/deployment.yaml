@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Values.name }}-deployment"
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+    spec:
+      containers:
+      - name: {{ .Values.name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        ports:
+        - containerPort: {{ .Values.containerPort }}
+        env:
+        - name: NODE_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: "{{ .Values.name }}-config"
+              key: NODE_ENV
+        - name: PORT
+          valueFrom:
+            configMapKeyRef:
+              name: "{{ .Values.name }}-config"
+              key: PORT
+        - name: MONGO_URI
+          valueFrom:
+            secretKeyRef:
+              name: "{{ .Values.name }}-secret"
+              key: MONGO_URI
+
+
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: "{{ .Values.name }}-deployment"
+#   namespace: {{ .Values.namespace }}
+# spec:
+#   replicas: {{ .Values.replicas }}
+#   selector:
+#     matchLabels:
+#       app: {{ .Values.name }}
+#   template:
+#     metadata:
+#       labels:
+#         app: {{ .Values.name }}
+#     spec:
+#       containers:
+#       - name: {{ .Values.name }}
+#         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+#         ports:
+#         - containerPort: {{ .Values.containerPort }}
+#         env:
+#         - name: NODE_ENV
+#           valueFrom:
+#             configMapKeyRef:
+#               name: "{{ .Values.name }}-config"
+#               key: NODE_ENV
+#         - name: PORT
+#           valueFrom:
+#             configMapKeyRef:
+#               name: "{{ .Values.name }}-config"
+#               key: PORT
+#         - name: MONGO_URI
+#           valueFrom:
+#             secretKeyRef:
+#               name: "{{ .Values.name }}-secret"
+#               key: MONGO_URI
+#         readinessProbe:
+#           httpGet:
+#             path: /health
+#             port: {{ .Values.containerPort }}
+#           initialDelaySeconds: 5
+#           periodSeconds: 10
+#           failureThreshold: 3
+#         livenessProbe:
+#           httpGet:
+#             path: /health
+#             port: {{ .Values.containerPort }}
+#           initialDelaySeconds: 15
+#           periodSeconds: 20
+#           failureThreshold: 3

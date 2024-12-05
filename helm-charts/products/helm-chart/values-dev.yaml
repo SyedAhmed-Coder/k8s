@@ -1,0 +1,17 @@
+namespace: dev
+# fullnameOverride: "user-service"
+image:
+  repository: wasti87/exercise-5
+  tag: dev
+
+name: "products" # Service name
+
+replicas: 2
+containerPort: 3000 # Container port
+
+nodeEnv: "development"
+port: 3000   # Port use by app, so its application node
+
+service:
+  port: 80 # service port on which it is listening
+  targetPort: 3000 # target to the container port
