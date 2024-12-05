@@ -12,4 +12,4 @@ maintainers:
   - name: Syed Ahmed
     email: syed.ahmed@solarinformatics.com
 sources:
-  - https://github.com/your-repo/user-service
+  - https://github.com/SyedAhmed-Coder/k8s.git/helm-charts/users/helm-chart
