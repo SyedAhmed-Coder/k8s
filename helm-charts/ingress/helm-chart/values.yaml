@@ -1,0 +1,24 @@
+namespace: default
+
+host:
+  name: solarinformatics.ddns.net
+
+ingress:
+  name: nginx-ingress-dev
+  className: nginx
+
+controller:
+  ingressClass: nginx
+  allowSnippetAnnotations: true
+
+services:
+  user:
+    name: user-service
+    HealthPath: /user-health
+    Path: /user/(.*)
+    port: 80
+  user1:
+    name: user1-service
+    HealthPath: /user1-health
+    Path: /user1/(.*)
+    port: 80

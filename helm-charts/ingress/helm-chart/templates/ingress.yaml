@@ -1,0 +1,277 @@
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: nginx-ingress-dev
+#   namespace: default
+#   annotations:
+#     nginx.ingress.kubernetes.io/rewrite-target: /$1
+
+# spec:
+#   ingressClassName: nginx
+#   rules:
+#     - http:
+#         paths:
+#           - path: /user-health
+#             pathType: Exact
+#             backend:
+#               service:
+#                 name: user-service  # Ensure this is the correct service name
+#                 port:
+#                   number: 80  # Ensure this matches the exposed port of your service
+#           - path: /user/(.*)
+#             pathType: ImplementationSpecific
+#             backend:
+#               service:
+#                 name: user-service
+#                 port:
+#                   number: 80 
+#           - path: /user1-health
+#             pathType: Exact
+#             backend:
+#               service:
+#                 name: user1-service
+#                 port:
+#                   number: 80  
+#           - path: /user1/(.*)
+#             pathType: ImplementationSpecific
+#             backend:
+#               service:
+#                 name: user1-service
+#                 port:
+#                   number: 80    
+
+
+
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: nginx-ingress-dev
+#   namespace: default
+#   annotations:
+#     nginx.ingress.kubernetes.io/rewrite-target: /  # Rewrite target to capture the path correctly
+# spec:
+#   ingressClassName: nginx
+#   rules:
+#     - http:
+#         paths:
+#           - path: /  # Route for user-service
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: user-service  # Ensure this is the correct service name
+#                 port:
+#                   number: 80  # Adjust to match the service port
+
+#           - path: /user  # Route for product-service
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: user-service  # Ensure this is the correct service name
+#                 port:
+#                   number: 80  # Adjust to match the service port
+
+
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: nginx-ingress-dev
+#   annotations:
+#     nginx.ingress.kubernetes.io/rewrite-target: /$1  # Use the captured group
+# spec:
+#   rules:
+#     - host: your-domain.com
+#       http:
+#         paths:
+#           - path: /user/(.*)
+#             pathType: ImplementationSpecific
+#             backend:
+#               service:
+#                 name: backend-service
+#                 port:
+#                   number: 80
+
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: nginx-ingress-dev
+#   namespace: default
+#   annotations:
+#     nginx.ingress.kubernetes.io/rewrite-target: /
+
+# spec:
+#   ingressClassName: nginx
+#   rules:
+#     - http:
+#         paths:
+#           - path: /user(/|$)(.*)
+#             pathType: ImplementationSpecific
+#             backend:
+#               service:
+#                 name: user-service  # Ensure this is the correct service name
+#                 port:
+#                   number: 80
+
+
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: nginx-ingress-dev
+#   namespace: default
+#   annotations:
+#     nginx.ingress.kubernetes.io/rewrite-target: /
+# spec:
+#   ingressClassName: nginx
+#   rules:
+#     - http:
+#         paths:
+#           - path: /
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: user-service  # Ensure this is the correct service name
+#                 port:
+#                   number: 80  # Ensure this matches the exposed port of your service
+
+
+
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: nginx-ingress-dev
+#   namespace: default
+#   annotations:
+#     nginx.ingress.kubernetes.io/rewrite-target: /
+#     # nginx.ingress.kubernetes.io/health-check-path: /health  # Global health check path (for general health check)
+# spec:
+#   ingressClassName: nginx
+#   rules:
+#     - http:
+#         paths:
+#           - path: /health(/|$)(.*)  # Path for user-service
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: user-service
+#                 port:
+#                   number: 80
+#           - path: /health/user2  # Health check path for user-service
+#             pathType: Exact
+#             backend:
+#               service:
+#                 name: user1-service
+#                 port:
+#                   number: 80
+          # - path: /product  # Path for product-service
+          #   pathType: Prefix
+          #   backend:
+          #     service:
+          #       name: product-service
+          #       port:
+          #         number: 80
+          # - path: /product/health  # Health check path for product-service
+          #   pathType: Exact
+          #   backend:
+          #     service:
+          #       name: product-service
+          #       port:
+          #         number: 80
+
+
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.ingress.name }}
+  namespace: {{ .Values.namespace }}
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  ingressClassName: {{ .Values.ingress.className }}
+  rules:
+    # - host: solarinformatics.hopto.org
+    #   http:
+    #     paths:
+    #       - path: {{ .Values.services.user.HealthPath }}
+    #         pathType: Exact
+    #         backend:
+    #           service:
+    #             name: {{ .Values.services.user.name }}
+    #             port:
+    #               number: {{ .Values.services.user.port }}
+    - host: {{ .Values.host.name }}
+      http:
+        paths:             
+          - path: {{ .Values.services.user.Path }}
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ .Values.services.user.name }}
+                port:
+                  number: {{ .Values.services.user.port }}
+          
+          - path: {{ .Values.services.user1.HealthPath }}
+            pathType: Exact
+            backend:
+              service:
+                name: {{ .Values.services.user1.name }}
+                port:
+                  number: {{ .Values.services.user1.port }}
+          - path: {{ .Values.services.user1.Path }}
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ .Values.services.user1.name }}
+                port:
+                  number: {{ .Values.services.user1.port }}
+
+
+
+
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: nginx-ingress-dev
+#   namespace: default  # Adjust if necessary
+#   annotations:
+#     nginx.ingress.kubernetes.io/rewrite-target: /$1  # This annotation rewrites paths based on regex capture groups
+#     nginx.ingress.kubernetes.io/use-regex: "true"
+#     nginx.ingress.kubernetes.io/ssl-redirect: "false"
+# spec:
+#   ingressClassName: nginx  # Ensure that the ingress controller matches this class
+#   rules:
+#     - host: ""  # This is the host (domain) for which this Ingress will apply
+#       http:
+#         paths:
+#           - path: /user-health
+#             pathType: Exact
+#             backend:
+#               service:
+#                 name: user-service  # Ensure this is the correct service name
+#                 port:
+#                   number: 80  # Ensure this matches the exposed port of your service
+#     - host: solarinformatics.hopto.org  # This is the host (domain) for which this Ingress will apply
+#       http:
+#         paths:
+#           - path: /user-health               
+#             pathType: ImplementationSpecific
+#             backend:
+#               service:
+#                 name: user-service
+#                 port:
+#                   number: 80
+#           - path: /user1-health
+#             pathType: Exact
+#             backend:
+#               service:
+#                 name: user1-service
+#                 port:
+#                   number: 80
+#           - path: /user1/(.*)
+#             pathType: ImplementationSpecific
+#             backend:
+#               service:
+#                 name: user1-service
+#                 port:
+#                   number: 80
