@@ -20,3 +20,10 @@ spec:
                 name: {{ .Values.services.user.name }}
                 port:
                   number: {{ .Values.services.user.port }}
+          - path: {{ .Values.services.user1.Path }}
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ .Values.services.user1.name }}
+                port:
+                  number: {{ .Values.services.user1.port }}
