@@ -4,7 +4,7 @@ image:
   repository: wasti87/exercise-5
   tag: dev
 
-name: "products" # Service name
+name: "user1" # Service name
 
 replicas: 2
 containerPort: 3000 # Container port
