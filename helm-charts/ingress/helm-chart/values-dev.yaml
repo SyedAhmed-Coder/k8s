@@ -23,7 +23,7 @@ services:
     Path: /user1/(.*)
     port: 80
   user3:
-    name: user1-service
-    HealthPath: /user1-health
-    Path: /user1/(.*)
+    name: user3-service
+    HealthPath: /user3-health
+    Path: /user3/(.*)
     port: 80
