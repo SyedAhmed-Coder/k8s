@@ -1,0 +1,19 @@
+namespace: preprod
+
+image:
+  repository: wasti87/exercise-5
+  tag: preprod
+
+ContainerConfig:
+  replicas: 2
+  containerPort: 3000
+
+service:
+  name: "user3"  
+  port: 80
+  targetPort: 3000
+
+nodeapp:
+  nodeEnv: "preprod"
+  port: 3000
+
