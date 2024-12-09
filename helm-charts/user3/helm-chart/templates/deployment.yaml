@@ -17,7 +17,7 @@ spec:
       - name: {{ .Values.service.name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         ports:
-        - containerPort: {{ .Values.containerconfig.containerPort }}
+        - containerPort: {{ .Values.ContainerConfig.containerPort }}
         env:
         - name: NODE_ENV
           valueFrom:
