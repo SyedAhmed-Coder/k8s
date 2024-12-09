@@ -120,14 +120,16 @@ EOF
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.service.name }}
+  name: "{{ .Values.service.name }}-service"
   namespace: {{ .Values.namespace }}
 spec:
   ports:
-    - port: {{ .Values.service.port }}
+    - protocol: TCP 
+      port: {{ .Values.service.port }}
       targetPort: {{ .Values.service.targetPort }}
   selector:
     app: {{ .Values.service.name }}
+  type: ClusterIP     
 EOF
 
   # Environment-specific values files
