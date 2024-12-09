@@ -139,7 +139,7 @@ image:
   repository: $IMAGE_REPOSITORY
   tag: $env
 
-ContainerConfig:
+containerconfig:
   replicas: 2
   containerPort: 3000
 

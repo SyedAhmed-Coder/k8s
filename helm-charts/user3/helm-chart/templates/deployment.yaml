@@ -4,7 +4,7 @@ metadata:
   name: "{{ .Values.service.name }}-deployment"
   namespace: "{{ .Values.namespace }}"
 spec:
-  replicas: {{ .Values.containerconfig.replicas }}
+  replicas: {{ .Values.ContainerConfig.replicas }}
   selector:
     matchLabels:
       app: {{ .Values.service.name }}
