@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: user3-stage
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/SyedAhmed-Coder/k8s.git
+    targetRevision: stage
+    path: helm-charts/user3/helm-chart
+    helm:
+      valueFiles:
+        - values-stage.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: stage
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

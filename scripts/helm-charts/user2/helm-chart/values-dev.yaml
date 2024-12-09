@@ -1,0 +1,19 @@
+namespace: dev
+
+image:
+  repository: wasti87/exercise-5
+  tag: dev
+
+containerconfig:
+  replicas: 3
+  containerPort: 3000
+
+service:
+  name": "user2"
+  port: 80
+  targetPort: 3000  
+
+# name: "user2"
+nodeapp:
+  nodeEnv: "dev"
+  port: 3000
