@@ -1,0 +1,19 @@
+namespace: stage
+
+image:
+  repository: wasti87/exercise-5
+  tag: stage
+
+containerconfig:
+  replicas: 2
+  containerPort: 3000
+
+service:
+  name: "user4"  
+  port: 80
+  targetPort: 3000
+
+nodeapp:
+  nodeEnv: "stage"
+  port: 3000
+

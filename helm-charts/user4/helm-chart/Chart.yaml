@@ -1,0 +1,15 @@
+apiVersion: v2
+name: user4
+description: A Helm chart for deploying the user4 service
+type: application
+version: 0.1.0
+appVersion: "1.0"
+keywords:
+  - user4
+  - service
+  - helm
+maintainers:
+  - name: Syed Ahmed
+    email: syed.ahmed@solarinformatics.com
+sources:
+  - https://github.com/your-repo/user4-service

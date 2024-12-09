@@ -33,4 +33,11 @@ spec:
               service:
                 name: {{ .Values.services.user3.name }}
                 port:
-                  number: {{ .Values.services.user3.port }}                  
+                  number: {{ .Values.services.user3.port }}   
+          - path: {{ .Values.services.user4.Path }}
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ .Values.services.user4.name }}
+                port:
+                  number: {{ .Values.services.user4.port }}                                  
