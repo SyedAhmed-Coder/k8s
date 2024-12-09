@@ -27,3 +27,8 @@ services:
     HealthPath: /user3-health
     Path: /user3/(.*)
     port: 80
+  user4:
+    name: user4-service
+    HealthPath: /user4-health
+    Path: /user4/(.*)
+    port: 80    
