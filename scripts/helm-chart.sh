@@ -1,5 +1,5 @@
 # Variables
-BASE_DIR="helm-charts"
+BASE_DIR="../helm-charts"
 MICROSERVICES=("user3") # Add more microservices as needed
 IMAGE_REPOSITORY="wasti87/exercise-5"
 
