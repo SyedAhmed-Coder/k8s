@@ -10,3 +10,4 @@ spec:
       targetPort: {{ .Values.service.targetPort }}
   selector:
     app: {{ .Values.service.name }}
+  type: ClusterIP 
