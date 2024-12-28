@@ -20,13 +20,13 @@ spec:
                 name: {{ .Values.services.user.name }}
                 port:
                   number: {{ .Values.services.user.port }}
-          - path: {{ .Values.services.user1.Path }}
+          - path: {{ .Values.services.inventory.Path }}
             pathType: ImplementationSpecific
             backend:
               service:
-                name: {{ .Values.services.user1.name }}
+                name: {{ .Values.services.inventory.name }}
                 port:
-                  number: {{ .Values.services.user1.port }}
+                  number: {{ .Values.services.inventory.port }}
           - path: {{ .Values.services.user3.Path }}
             pathType: ImplementationSpecific
             backend:

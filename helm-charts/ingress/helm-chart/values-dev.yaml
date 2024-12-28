@@ -1,4 +1,4 @@
-namespace: dev
+namespace: development
 
 host:
   name: solarinformatics.hopto.org
@@ -17,10 +17,10 @@ services:
     HealthPath: /user-health
     Path: /user/(.*)
     port: 80
-  user1:
-    name: user1-service
-    HealthPath: /user1-health
-    Path: /user1/(.*)
+  inventory:
+    name: inventory-service
+    HealthPath: /inventory-health
+    Path: /inventory/(.*)
     port: 80
   user3:
     name: user3-service

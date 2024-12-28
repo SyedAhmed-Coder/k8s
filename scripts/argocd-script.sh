@@ -3,7 +3,7 @@
 # Variables
 REPO_URL="https://github.com/SyedAhmed-Coder/k8s.git"
 BASE_DIR="../argocd/applications"  # Root directory for applications
-NAMESPACES=("dev" "stage" "prod")  # Environments/namespaces
+NAMESPACES=("development" "stage" "preprod")  # Environments/namespaces
 MICROSERVICES=("user4")  # List of microservices
 
 # Create Base Directory if it doesn't exist
