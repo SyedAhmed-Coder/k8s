@@ -40,4 +40,11 @@ spec:
               service:
                 name: {{ .Values.services.user4.name }}
                 port:
-                  number: {{ .Values.services.user4.port }}                                  
+                  number: {{ .Values.services.user4.port }} 
+          - path: {{ .Values.services.user.name }}
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ .Values.services.user4.name }}
+                port:
+                  number: {{ .Values.services.user4.port }}                                   
